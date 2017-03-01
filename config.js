@@ -1,6 +1,6 @@
 function Config() {
     Object.call(this);
-    this.game_time = 60000;
+    this.game_time = 120000;
 
     this.enter_rectangle = 20;
     this.ship_death_penalty = 100;
@@ -13,8 +13,8 @@ function Config() {
     this.max_angle = 150;
     //this.stars = true;
 
-    this.staircase = true;
-    this.rect_width = 200;
+    this.staircase = false;
+    this.rect_width = 110;
     this.staircase_delta = 15;
     this.staircase_decrease_threshold = 1; //Decrease half_width if deaths exceed this
     this.staircase_increase_threshold = 1; //Increase half_width if deaths exceed this
