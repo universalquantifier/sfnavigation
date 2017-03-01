@@ -1,0 +1,21 @@
+experiment:
+  mode: sandbox
+  name: autoturn
+  version: v1
+  batch: 1
+  conditions: ["autoturn"]
+
+HIT:
+  lifetime: 3
+  duration: 4.0
+  base_pay: 4.00
+  max_bonus: 12.00
+  keywords: []
+  frame_height: 650
+  url: https://andersonlab.net/sf/sf.html
+  title: Space Fortress Study
+  description: |
+    This task is part of a research study conducted by Dr. John R. Anderson at Carnegie Mellon University.
+    In this HIT you will pilot a spaceship in a two dimensional, frictionless space. The goal is to maximize your points by destroying the fortress and avoiding danger.
+    The expected duration is about an hour.
+    You will earn up to <<maxbonus>> in bonus money depending on how well you play the game.

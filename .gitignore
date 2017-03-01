@@ -1,0 +1,9 @@
+staging/
+not-used/
+mturk/mturk/shawn-laptop.pem
+db/test/
+from-server/
+mturk/live-*/
+mturk/sandbox-*/
+*.dx32fsl
+TODO

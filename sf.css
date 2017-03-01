@@ -1,0 +1,644 @@
+body {
+    /* margin: 8px 0 10px 0; */
+    /* margin: 0; */
+    padding: 0;
+    font-size: 14px;
+    font-family: Source Sans Pro, sans-serif;
+}
+
+div.experiment_area {
+    width: 800px;
+    height: 800px;
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Consent */
+
+div.consent-text {
+    padding: 1px 20px 1px 20px;
+    text-align: justify;
+}
+
+div.question {
+    background-color: lightblue;
+    padding: 5px;
+    /* border: 1px solid black; */
+    text-align: left;
+    /* display: inline-block; */
+}
+
+div.lq {
+    margin: 0px 5px 1px 5px;
+    padding: 5px 5px 10px 5px;
+}
+
+div.rq {
+    margin: 0px 5px 1px 0px;
+}
+
+div.lq2 {
+    margin: 0px 5px 1px 5px;
+    /* padding: 5px 5px 10px 5px; */
+}
+
+div.info {
+  position: relative;
+    padding: 10px 5px 5px 10px;
+    font-weight: normal;
+    /*font-family: serif;*/
+    font-size: 16px;
+    background-color: #FFFFFF;
+    text-align: center;
+    /*vertical-align: middle;*/
+    /*margin-bottom: 5px; */
+    color: #333333;
+}
+
+div.left-column {
+    float: left;
+    width: 50%;
+}
+
+div.right-column {
+    float: right;
+    width: 50%;
+}
+
+div.text { font-weight: bold; padding: 0 0 5px 0;}
+
+div.qtext {
+    display: inline-block;
+    background: orange;
+}
+
+.warning {
+    visibility: hidden;
+    color: white;
+    background-color: red;
+    padding: 2px 10px 2px 10px;
+    border-radius: 20px;
+    font-weight: normal;
+    font-family: sans-serif;
+    font-size: 12px;
+    /* margin: 0 0 0 10px; */
+}
+
+input.sat {
+    width: 5em;
+}
+
+div.demographic-submit-area {
+    position: absolute;
+    bottom: 15px;
+    width: 100%;
+    text-align: center;
+    /* background-color: orange; */
+}
+
+div.submit-area {
+    position: relative;
+    padding: 5px;
+    width: 100%;
+    text-align: center;
+    /* background-color: orange; */
+}
+
+textarea {
+    width: 95%;
+}
+
+div.error {
+    background-color: rgb(255,100,100);
+    color: white;
+}
+
+/* message screen */
+
+div.message-container {
+    display: table;
+    height: 80%;
+    width: 100%;
+}
+
+div.message-body {
+    position: relative;
+    background-color: white;
+    /* background-color: rgb(230,240,255); */
+    /* padding: 5px 0 5px 0px; */
+    text-align: center;
+
+
+    display: table-cell;
+    vertical-align: middle;
+
+    font-family: Source Sans Pro, sans-serif;
+    font-size: 16px;
+    margin-bottom: 65px;
+}
+
+/* full message screen */
+
+div.full-message-body {
+    position: relative;
+    background-color: white;
+    /*background-color: rgb(230,240,255); */
+    /* padding: 5px 0 5px 0px; */
+    text-align: center;
+    height: 100%;
+    width: 100%;
+}
+
+div.message-text {
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    font-weight: normal;
+    font-family: Source Sans Pro;
+    font-size: 16px;
+    /* height: 75%; */
+    text-align: left;
+    color: #222222;
+}
+
+div.footer-continue-area {
+    position: absolute;
+    bottom: 0px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    text-align: center;
+    width: 100%;
+}
+
+/* game */
+
+div.canvasarea {
+    background: #000000;
+    width: 710px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div.sending {
+    width: 400px;
+    font-family: sans-serif;
+    text-align: center;
+    border-radius: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+div.sendfail {
+    background: #EE3333;
+}
+
+.sendsuccess {
+    /* background: #33DD33; */
+    background: #CCCCCC;
+}
+
+div.sendprogress {
+    background: #CCCCCC;
+}
+
+/* controls */
+
+div.instr {
+    display: inline-block;
+    font-size: 18px;
+    margin: 0 15px 0 15px;
+    width: 150px;
+    height: 100px;
+    position: relative;
+}
+
+span.keyblock {
+    background-color: rgb(50,50,50);
+    color: white;
+    display: inline-block;
+    padding: 5px;
+    width: 40px;
+    height: 30px;
+    border-radius: 5px;
+    vertical-align: top;
+}
+
+span.top-of-parent {
+  position: absolute;
+  top: 2px;
+  left: 13px;
+}
+
+span.spaceblock {
+    background-color: rgb(50,50,50);
+    color: white;
+    display: inline-block;
+    padding: 5px 15px 5px 15px;
+    border-radius: 5px;
+}
+
+span.keyinstr {
+    margin: 3px;
+    /* background-color: gray; */
+    /* color: white; */
+    display: inline-block;
+    padding: 5px;
+    color: gray;
+        vertical-align: top;
+}
+
+/* loading screen */
+
+div.loading {
+    /* text-align: center; */
+    background-color: rgb(230,240,255);
+    /* height: 100%; */
+}
+
+div.loadingline {
+    font-weight: bold;
+    font-family: sans-serif;
+    font-size: 48px;
+    line-height: 630px;
+    text-align: center;
+}
+
+#button_area input[type=button] {
+    margin-right: 0.5em;
+    min-width: 2em;
+}
+
+input.footer-continue {
+    width: 120px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+div.pagenum {
+    font-family: sans-serif;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+/* reject screen */
+
+div.reject-container {
+    text-align: center;
+    width: 800px;
+    height: 630px;
+    display: table;
+
+}
+
+div.reject-body {
+    background-color: rgb(230,240,255);
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+div.feedback-question {
+    display:inline-block;
+    text-align: left;
+    width: 65%;
+    background: lightblue;
+    margin-bottom: 1px;
+    padding: 10px 20px 0px 20px;
+}
+
+div.feedback-header {
+    font-family: sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+div.gq-question {
+    text-align: left;
+    /* width: 100%; */
+    background: lightblue;
+    margin-bottom: 1px;
+    padding: 20px 20px 10px 20px;
+    border-width: 0px 20px 4px 20px;
+    border-style: solid;
+    border-color: white;
+    font-size: 16px;
+
+}
+
+
+canvas {
+    background: #000000;
+    /*box-shadow: 5px 5px 10px #AAAAAA; */
+}
+
+.selected {
+  border-width: 8px;
+  border-color: orange;
+  border-style: solid;
+  position: relative;
+  margin: 17px;
+}
+
+.unselected {
+  margin: 25px;
+  border-style: none;
+}
+
+.vaq-canvas {
+  background: #FFFFFF;
+  border-width: 2px;
+  border-style: solid;
+}
+
+.selected-small {
+  border-color: #990000;
+}
+
+.unselected-small {
+  border-color: grey;
+}
+
+#vaq-container {
+  position: relative;
+  margin-left: 30px;
+  /*margin-top: 20px;
+  margin-bottom: 15px;*/
+}
+
+/*#left-vaq-container {
+  position: relative;
+  float: left;
+  width: 260px;
+  height: 225px;
+  margin-left: 20px;
+}
+
+#right-vaq-container {
+  position: relative;
+  float: right;
+  width: 395px;
+  margin-right: 20px;
+  margin-bottom: 40px;
+}
+
+#right-left-vaq-container {
+  position: relative;
+  float: left;
+  width: 235px;
+}
+
+#right-right-vaq-container {
+  position: relative;
+  float: right;
+  width: 160px;
+}
+
+#left-left-vaq-container {
+  position: relative;
+  float: left;
+  width: 110px;
+  top: 75px;
+}
+
+#left-right-vaq-container {
+  position: relative;
+  float: right;
+  width: 150px;
+  top: 75px;
+}
+
+#right-left-left-col {
+  position: relative;
+  float: left;
+  width: 75px;
+}
+
+#right-left-right-col {
+  position: relative;
+  float: right;
+  width: 160px;
+} */
+
+.vaq-iconic-font {
+  font-family: helvetica,sans-serif;
+  font-size: 60px;
+  font-weight: bolder;
+  color: rgb(144,0,0);
+  text-shadow: 2px 2px rgb(167,120,128);
+}
+
+/*#vaq-plus {
+  position: relative;
+  bottom: 51px;
+  right: 1px;
+}
+
+#vaq-equals {
+  position: relative;
+  top: 110px;
+  right: 15px;
+} */
+
+/* Almost a straight copy of code found here:
+http://jasonmillerdesign.com/Programming/Style_HR_Horizontal_Rule_with_CSS*/
+hr.sf-hr {
+   display: block;
+   position: relative;
+   padding: 0;
+   margin-top: 0px;
+   margin-bottom: 8px;
+   height: 0;
+   width: 100%;
+   max-height: 0;
+   font-size: 1px;
+   line-height: 0;
+   clear: both;
+   border: none;
+   border-top: 1px solid #aaaaaa;
+   border-bottom: 1px solid #ffffff;
+}
+
+.card {
+  position: relative;
+  width: 800px;
+  background-color: #FFFFFF;
+  box-shadow: 0px 5px 20px #AAAAAA;
+  overflow: auto;
+}
+
+div#content-card {
+  height: 600px;
+}
+
+div#progress-card {
+  height: 50px;
+}
+
+div.finished-section {
+  display: inline-block;
+  margin: 0px;
+  padding: 5px;
+  height: 50px;
+  width: 160px;
+  border-style: solid;
+  border-top-width: 0px;
+  border-bottom-width: 0px;
+  border-right-width: 0px;
+  border-left-width: 1px;
+  border-color: grey;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#67bcdb+0,3eaace+40,257a99+100 */
+  background: rgb(103,188,219); /* Old browsers */
+  /*background: -moz-linear-gradient(top,  rgba(103,188,219,1) 0%, rgba(62,170,206,1) 40%, rgba(37,122,153,1) 100%); /* FF3.6-15 */
+  /*background: -webkit-linear-gradient(top,  rgba(103,188,219,1) 0%,rgba(62,170,206,1) 40%,rgba(37,122,153,1) 100%); /* Chrome10-25,Safari5.1-6 */
+  /*background: linear-gradient(to bottom,  rgba(103,188,219,1) 0%,rgba(62,170,206,1) 40%,rgba(37,122,153,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#67bcdb', endColorstr='#257a99',GradientType=0 ); /* IE6-9 */
+
+}
+
+div.info-section {
+  display: inline-block;
+  margin: 0px;
+  padding: 5px;
+  height: 50px;
+  width: 160px;
+  border-style: solid;
+  border-width: 1px;
+  border-left-width: 0px;
+  border-bottom-width: 0px;
+  border-color: grey;
+  background: rgb(230,240,255);
+}
+
+div.selected-section {
+  position: relative;
+  display: inline-block;
+  margin: 0px;
+  padding: 5px;
+  height: 50px;
+  width: 160px;
+  border-style: solid;
+  border-width: 1px;
+  border-right-width: 0px;
+  border-color: grey;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#97c1d1+0,74a9ba+40,437e93+100 */
+  background: rgb(151,193,209); /* Old browsers */
+  /*background: -moz-linear-gradient(top,  rgba(151,193,209,1) 0%, rgba(116,169,186,1) 40%, rgba(67,126,147,1) 100%); /* FF3.6-15 */
+  /*background: -webkit-linear-gradient(top,  rgba(151,193,209,1) 0%,rgba(116,169,186,1) 40%,rgba(67,126,147,1) 100%); /* Chrome10-25,Safari5.1-6 */
+  /*background: linear-gradient(to bottom,  rgba(151,193,209,1) 0%,rgba(116,169,186,1) 40%,rgba(67,126,147,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#97c1d1', endColorstr='#437e93',GradientType=0 ); /* IE6-9 */
+}
+
+div.unfinished-section {
+  display: inline-block;
+  margin: 0px;
+  padding: 5px;
+  height: 50px;
+  width: 160px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: grey;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#c2c2c2+0,a2a2a2+40,737373+100 */
+  background: rgb(194,194,194); /* Old browsers */
+  background: -moz-linear-gradient(top, rgba(194,194,194,1) 0%, rgba(162,162,162,1) 40%, rgba(115,115,115,1) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, rgba(194,194,194,1) 0%,rgba(162,162,162,1) 40%,rgba(115,115,115,1) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, rgba(194,194,194,1) 0%,rgba(162,162,162,1) 40%,rgba(115,115,115,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c2c2c2', endColorstr='#737373',GradientType=0 ); /* IE6-9 */
+}
+
+div.section-transition-arrow {
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  font-size: 0px;
+  display: inline;
+  padding: 0px;
+  margin: 0px;
+  width: 0px;
+  height: 0px;
+  border-right-width: 12px;
+  border-left-width: 12px;
+  border-bottom-width: 24px;
+  border-top-width: 24px;
+  border-right-color: rgb(230,240,255);
+  /*border-right-color: rgb(103,188,219);
+  -webkit-border-image:
+    -webkit-gradient(linear, 0 0, 0 100%, from(black), to(rgba(0, 0, 0, 0))) 1 100%;
+  -webkit-border-image:
+    -webkit-linear-gradient(top,  rgba(103,188,219,1) 0%,rgba(62,170,206,1) 40%,rgba(37,122,153,1) 100%);
+  -moz-border-image:
+    -moz-linear-gradient(top,  rgba(103,188,219,1) 0%, rgba(62,170,206,1) 40%, rgba(37,122,153,1) 100%);
+  -o-border-image:
+    -o-linear-gradient(to bottom,  rgba(103,188,219,1) 0%,rgba(62,170,206,1) 40%,rgba(37,122,153,1) 100%);
+  border-image:
+    linear-gradient(to bottom,  rgba(103,188,219,1) 0%,rgba(62,170,206,1) 40%,rgba(37,122,153,1) 100%); */
+  border-left-color: transparent;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  border-style: solid;
+}
+
+div.main-header {
+  position: relative;
+  /*width: 800px;*/
+  padding: 3px;
+  font-size: 24px;
+  background-color: rgb(50,50,50);/*#990000;#5566BB;*/
+  text-align: center;
+  color: white;
+  font-family: Source Sans Pro;
+  /*box-shadow: 0px 5px 10px #AAAAAA;*/
+}
+
+.glyphicon {
+  position: relative;
+  display: inline-block;
+  /*top: 6px;*/
+  font-size: 24px;
+  padding-right: 10px;
+}
+
+.sfbutton {
+  background-color: rgb(50,50,50);
+  color: white;
+  box-shadow: 0px 5px 10px #AAAAAA;
+  border-radius: 3px;
+  padding: 8px;
+  border-style: none;
+  font-size: 16px;
+  font-family: Source Sans Pro, sans-serif;
+}
+
+.sfbutton:hover {
+    background-color: rgb(90,90,90);
+}
+
+.sfbutton:focus {
+    background-color: rgb(90,90,90);
+}
+
+div.left-column {
+  /*margin-bottom: 65px; */
+}
+
+textarea {
+    resize: none;
+    border-width: 2px;
+    border-color: grey;
+}
+
+div.gq-boxheader {
+  margin-bottom: 5px;
+}
+
+div#status {
+  height: 40px;
+}
+
+.noDisplay {
+  display : none;
+}
