@@ -9,7 +9,7 @@ function consent_html(include_inputs) {
     html += '<h3>Procedures</h3>';
     html += '<p>You will be asked to participate.';
 
-    html += '<p>In this study, you must learn to control a space craft in a frictionless environment. Each game lasts 3 minutes, during which your goal will be to maximize your score. There are 20 games in this study.';
+    html += '<p>In this study, you must learn to control a space craft in a frictionless environment. Each game lasts 2 minutes, during which your goal will be to maximize your score. There are 20 games in this study.';
 
     html += '<p>The expected duration of this study is about an hour.';
 
@@ -65,12 +65,12 @@ function getInstructions(page) {
                 '</ul>'+
                 'At no point in the game can you score less than zero points.'+
                 '<h3>Bonus Money</h3>'+
-                'Bonus compensation starts at zero and increases by 0.02 cents for each point earned in a game.  The total amount you earn in a game cannot be greater than 60 cents or less than 0 cents.  To illustrate the rate of earnings:'+
-                '<ul><li>If you earn 800 points in one game, your bonus will increase by 16 cents.'+
-                '<li>Earning 100 additional points in a game increases your bonus by 2 cents'+
-	        '<li>If you earn 400 points on average for each of the 20 games, your total bonus will be $1.60.'+
+                'Bonus compensation starts at zero and increases by 0.06 cents for each point earned in a game.  The total amount you earn in a game cannot be greater than 60 cents or less than 0 cents.  To illustrate the rate of earnings:'+
+                '<ul><li>If you earn 800 points in one game, your bonus will increase by 48 cents.'+
+                '<li>Earning 100 additional points in a game increases your bonus by 6 cents'+
+	        '<li>If you earn 500 points on average for each of the 20 games, your total bonus will be $6.00.'+
                 '<li>The total bonus you earn across all 20 games cannot be less than zero dollars and cannot be more than $12.'+
-	        '</ul><p>To maximize your bonus you must earn at least <b>3000 points</b> in each game.');
+	        '</ul><p>To maximize your bonus you must earn at least <b>1000 points</b> in each game.');
     default:
         return '';
     }
@@ -89,7 +89,7 @@ function createScreens() {
     screens.push(new Consent(consent_html(true)));
     screens.push(new DemographicSurvey());
 
-    //screens.push(new Instructions(getInstructions, 4));
+    screens.push(new Instructions(getInstructions, 4));
 
     //screens.push(new SoundCheck());
 
