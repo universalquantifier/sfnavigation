@@ -25,24 +25,19 @@ var SituationQtns =
    {A:{speed:1, blue: 25, ship: 145}, B:{speed:1, blue: 55, ship: 145}, tag: 1, change: 0},
    {A:{speed:1, blue: 100, ship: 145}, B:{speed:1, blue: 55, ship: 145}, tag: 1, change: 0}]
 
+var situation_common_prompt = '<p>Both ships are currently moving along the center of the green rectangle. '
+          +' They have both begun to thrust, and will continue to thrust until they'
+          +' are moving parallel to the (long side of the) blue rectangle.</p>';
+
 var tags = new Array(3);
 
-var SituationInstructions =
-
-tags[0] = '<p>Both ships are currently moving along the center of the green rectangle. '
-          +' They have both begun to thrust, and will continue to thrust until they'
-          +' are moving parallel to the (long side of the) blue rectangle.</p>'
-          +'<p>Which ship will have to thrust the least to move parallel to the blue '
+tags[0] = '<p>Which ship will have to thrust the least to move parallel to the blue '
           +'rectangle?</p>';
 
-tags[1] = '<p>Both ships are currently moving along the center of the green rectangle. '
-          +' They have both begun to thrust, and will continue to thrust until they'
-          +' are moving parallel to the (long side of the) blue rectangle.</p>'
-          +'<p>Which ship will be moving faster when it has thrust enough to move '
+tags[1] = '<p>Which ship will <strong>be moving faster when it has thrust enough</strong> to move '
           +'parallel to the blue rectangle?</p>';
 
-tags[2] = 'Both ships are currently moving along the center of the green rectangle. '
-          +' Which ship can move parallel to the blue rectangle with a single thrust in '
+tags[2] = 'Which ship can move parallel to the blue rectangle with a single thrust in '
           +'the direction it is pointing?  In other words, <strong>avoid</strong> selecting the ship that '
           +'cannot move parallel to the blue rectangle unless it thrusts in a different direction.';
 
@@ -216,9 +211,10 @@ function Situation(config, question, qnum, num_questions, randomize_order) {
     }
     this.nochoice_status = '<strong>You must choose an answer before you can continue.</strong>';
     this.corrected_status = 'Press submit when you have finalized your choice.';
-    this.body = '<div class="message-text">'+this.instructions
+    this.body = '<div class="message-text">' + situation_common_prompt
       +'<div id="situation-container">' + '<canvas class="unselected" id="left-screen-canvas" width="300px" height="300px"></canvas>'
-      +'<canvas class="unselected" id="right-screen-canvas" width="300px" height="300px"></canvas></div></div>';
+      +'<canvas class="unselected" id="right-screen-canvas" width="300px" height="300px"></canvas></div>'
+      + tags[question.tag] + '</div>';
 
     return this;
 }
@@ -526,32 +522,46 @@ vectorAdditionQuestion.prototype.generateLayout = function() {
 
   var self = this;
   var addendSize = Math.max(this.addendX.getMinSize(),this.addendY.getMinSize());
-  var answerSize = this.answers.reduce(function(acc,newVal) {
+  var maxAnswerSize = this.answers.reduce(function(acc,newVal) {
     return Math.max(acc,self['vaq-answer'+newVal].getMinSize());
-  },0);
-  var left = {}, top = {};
+  }, 0);
+  var pos = {};
   var fontWidth = 36, fontHeight = 67, gridMargin = 14;
   var plusMargin = 15;
+  var maxContainerWidth = $('.experiment_area').css('width') - 2*$('.message-text');
   var containerWidth, containerHeight;
+  var leftmostAnswerLeft, addendYRight;
+    
+  pos['addendX'] = {}; pos['addendY'] = {};
+  pos['answerA'] = {}; pos['answerB'] = {}; 
+  pos['answerC'] = {}; pos['answerD'] = {}; 
+  pos['plus'] = {};  pos['equals'] = {};
+  
+  pos['addendX'].left = 0; pos['plus'].left = this['addendX'].getMinSize()+plusMargin;
+  pos['addendY'].left = pos['plus'].left+fontWidth+plusMargin;
+  pos['answerB'].left = 562;
+  pos['answerA'].right = Math.max(this['vaq-answerB'].getMinSize(),this['vaq-answerD'].getMinSize())+gridMargin;
+  pos['answerC'].right = pos['answerA'].right; 
+  pos['answerD'].left = pos['answerB'].left;
+  leftmostAnswerLeft = pos['answerB'].left-gridMargin - Math.max(this['vaq-answerA'].getMinSize(),this['vaq-answerC'].getMinSize());
+  addendYRight = pos['addendY'].left+this['addendY'].getMinSize();
+  pos['equals'].left = addendYRight+(leftmostAnswerLeft-addendYRight)/2-fontWidth/2;
 
-  left['addendX'] = 0; left['plus'] = addendSize+plusMargin;
-  left['addendY'] = left['plus']+fontWidth+plusMargin;
-  left['answerB'] = 562;//left['answerA']+answerSize+gridMargin;
-  left['answerA'] = left['answerB']-gridMargin-answerSize;
-  left['answerC'] = left['answerA']; left['answerD'] = left['answerB'];
-  left['equals'] = left['addendY']+addendSize+(left['answerA']-(left['addendY']+addendSize)-fontWidth)/2;
+  containerWidth = pos['answerD'].left+Math.max(this['vaq-answerB'].getMinSize(),this['vaq-answerD'].getMinSize());
+  containerHeight = 370;
 
-  containerWidth = left['answerD']+answerSize;
-  containerHeight = 370;//Math.max(addendSize,fontHeight,gridMargin+2*answerSize);
-
-  top['addendX'] = (containerHeight-addendSize)/2; top['addendY']=top['addendX'];
-  top['plus'] = (containerHeight-fontHeight)/2; top['equals']=top['plus'];
-  top['answerA'] = (containerHeight-gridMargin)/2-answerSize;
-  top['answerC'] = top['answerA']+gridMargin+answerSize;
-  top['answerB'] = top['answerA']; top['answerD'] = top['answerC'];
+  pos['addendX'].bottom = (containerHeight-Math.max(this.addendX.getMinSize(),this.addendY.getMinSize()))/2; 
+  pos['addendY'].bottom = pos['addendX'].bottom;
+  pos['plus'].top = (containerHeight-fontHeight)/2; 
+  pos['equals'].top = pos['plus'].top;
+  pos['answerA'].top = (containerHeight-gridMargin)/2-this['vaq-answerA'].getMinSize();
+  pos['answerB'].top = (containerHeight-gridMargin)/2-this['vaq-answerB'].getMinSize();
+  pos['answerC'].top = (containerHeight+gridMargin)/2;
+  pos['answerD'].top = pos['answerC'].top;
 
   var setPosition = function(stub) {
-    $('#vaq-'+stub).css({'position':'absolute','left':left[stub],'top':top[stub]});
+    pos[stub].position = 'absolute';
+    $('#vaq-'+stub).css(pos[stub]);
   };
 
   $('#vaq-container').css({'width':containerWidth,'height':containerHeight});
@@ -559,8 +569,12 @@ vectorAdditionQuestion.prototype.generateLayout = function() {
   setPosition('addendX'); setPosition('addendY');
   setPosition('plus'); setPosition('equals');
   this.answers.forEach(function(v) { setPosition('answer'+v); } );
-  this.answers.forEach(function(v) { self['vaq-answer'+v].setSize(answerSize); } );
-  this.addendX.setSize(addendSize); this.addendY.setSize(addendSize);
+  this.answers.forEach(function(v) { 
+      var answerObj = self['vaq-answer'+v];
+      answerObj.setSize(answerObj.getMinSize()); 
+  } );
+  this.addendX.setSize(this.addendX.getMinSize()); 
+  this.addendY.setSize(this.addendY.getMinSize())
 }
 
 vectorAdditionQuestion.prototype.cleanup = function() {

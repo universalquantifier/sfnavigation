@@ -7,7 +7,7 @@ function Config() {
 
     this.ship_explode_duration = 1000;
 
-    this.max_points = 3000;
+    this.max_points = 1000;
     this.max_bonus = 60;
     this.min_angle = 30;
     this.max_angle = 150;

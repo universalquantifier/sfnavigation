@@ -93,24 +93,26 @@ function createScreens() {
 
     //screens.push(new SoundCheck());
 
-    for (i=0; i<numGames; i++) {
+    for (i=0; i < numGames; i++) {
 
         var g = new Game(config, i+1);
-        // var sd = new StoreGameDataScreen(g, i);
         var s = new ScoreScreen(i);
         var n = i+1;
         screens.push(new GameStartScreen('<h1>Game '+n.toString()+' of '+numGames.toString()+'</h1>' +
                                          '<div style="text-align: center; padding: 30px 0 0 0; position: relative;">'+
-                                         '<div class="instr"><span class="keyblock">W</span><br><span class="keyinstr">Thrust</span></div>'+
-                                         '<div class="instr"><span class="keyblock">A</span><br><span class="keyinstr">Turn Counterclockwise</span></div>'+
-                                         '<div class="instr"><span class="keyblock">D</span><br><span class="keyinstr">Turn Clockwise</span></div></div>'+
-                                         '<p>Games are 3 minutes long.'+
+                                         '<div class="instr"><span class="keyblock">W</span><br>'+
+                                            '<span class="keyinstr">Thrust</span></div>'+
+                                         '<div class="instr"><span class="keyblock">A</span><br>'+
+                                            '<span class="keyinstr">Turn CC-wise&nbsp;<img src="ccwise.png" width="21" height="23"></span></div>'+
+                                         '<div class="instr"><span class="keyblock">D</span><br>'+
+                                            '<span class="keyinstr">Turn C-wise&nbsp;<img src="cwise.png" width="21" height="23"></span></div>'+
+                                         '</div>'+
+                                         '<p>Games are 2 minutes long.'+
                                          '<p>To review the instructions, click <a id="instructionslink" href="#">here</a>.'+
                                          '<p>When you are ready to start the game, press ENTER.',
                                          getInstructions, 4));
         screens.push(g);
-        // screens.push(sd);
-        //screens.push(s); //Commented out by me
+        screens.push(s); 
     }
 
     screens.push(getSituationInstructionScreen(config));

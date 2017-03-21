@@ -1,6 +1,6 @@
 CREATE DATABASE sf_navigation;
 
---CREATE USER 'exp'@'localhost' IDENTIFIED BY 'password';
+-- CREATE USER 'exp'@'localhost' IDENTIFIED BY 'password';
 
 GRANT ALL ON sf_navigation.* to 'exp'@'localhost';
 

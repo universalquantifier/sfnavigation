@@ -880,8 +880,10 @@ Game.prototype.update_ship = function () {
 
 Game.prototype.update_rectangles = function() {
     if (this.ship.alive) {
+        //should probably switch the order of the update and the if statement
+        //currently doesn't preserve the invariant that the ship is either in the green rectangle or not alive
         if (this.next_segment.contains(this.ship.position) && !this.segment.contains(this.ship.position)) {
-
+ 	    console.log("I'm in a new rectangle.");
             this.segment = this.next_segment;
             this.segment.ghost = false;
 
@@ -988,12 +990,12 @@ Game.prototype.step_one_tick = function () {
     this.update_time();
     this.process_key_state();
     this.monitor_ship_respawn();
+    
     this.update_ship();
     this.update_rectangles();
-
     this.stars ? this.stars.update(this.ship.velocity) : undefined;
     // console.log('alive', this.gameTimer.elapsed(), this.tinc, this.ship.deathTimer.elapsed(), this.ship.alive);
-
+    
     this.recordEverything();
     this.step_timers();
 };

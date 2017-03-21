@@ -330,7 +330,6 @@ div.gq-question {
 
 }
 
-
 canvas {
     background: #000000;
     /*box-shadow: 5px 5px 10px #AAAAAA; */
@@ -370,60 +369,6 @@ canvas {
   margin-bottom: 15px;*/
 }
 
-/*#left-vaq-container {
-  position: relative;
-  float: left;
-  width: 260px;
-  height: 225px;
-  margin-left: 20px;
-}
-
-#right-vaq-container {
-  position: relative;
-  float: right;
-  width: 395px;
-  margin-right: 20px;
-  margin-bottom: 40px;
-}
-
-#right-left-vaq-container {
-  position: relative;
-  float: left;
-  width: 235px;
-}
-
-#right-right-vaq-container {
-  position: relative;
-  float: right;
-  width: 160px;
-}
-
-#left-left-vaq-container {
-  position: relative;
-  float: left;
-  width: 110px;
-  top: 75px;
-}
-
-#left-right-vaq-container {
-  position: relative;
-  float: right;
-  width: 150px;
-  top: 75px;
-}
-
-#right-left-left-col {
-  position: relative;
-  float: left;
-  width: 75px;
-}
-
-#right-left-right-col {
-  position: relative;
-  float: right;
-  width: 160px;
-} */
-
 .vaq-iconic-font {
   font-family: helvetica,sans-serif;
   font-size: 60px;
@@ -431,18 +376,6 @@ canvas {
   color: rgb(144,0,0);
   text-shadow: 2px 2px rgb(167,120,128);
 }
-
-/*#vaq-plus {
-  position: relative;
-  bottom: 51px;
-  right: 1px;
-}
-
-#vaq-equals {
-  position: relative;
-  top: 110px;
-  right: 15px;
-} */
 
 /* Almost a straight copy of code found here:
 http://jasonmillerdesign.com/Programming/Style_HR_Horizontal_Rule_with_CSS*/
@@ -467,7 +400,13 @@ hr.sf-hr {
   position: relative;
   width: 800px;
   background-color: #FFFFFF;
-  box-shadow: 0px 5px 20px #AAAAAA;
+  /* box-shadow: 0px 5px 20px #AAAAAA; */
+  border-right-width: 0px;
+  border-left-width: 0px;
+  border-top-width: 0px;
+  border-bottom-width: 3px;
+  border-color: lightgray;
+  border-style: solid;
   overflow: auto;
 }
 
@@ -477,109 +416,6 @@ div#content-card {
 
 div#progress-card {
   height: 50px;
-}
-
-div.finished-section {
-  display: inline-block;
-  margin: 0px;
-  padding: 5px;
-  height: 50px;
-  width: 160px;
-  border-style: solid;
-  border-top-width: 0px;
-  border-bottom-width: 0px;
-  border-right-width: 0px;
-  border-left-width: 1px;
-  border-color: grey;
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#67bcdb+0,3eaace+40,257a99+100 */
-  background: rgb(103,188,219); /* Old browsers */
-  /*background: -moz-linear-gradient(top,  rgba(103,188,219,1) 0%, rgba(62,170,206,1) 40%, rgba(37,122,153,1) 100%); /* FF3.6-15 */
-  /*background: -webkit-linear-gradient(top,  rgba(103,188,219,1) 0%,rgba(62,170,206,1) 40%,rgba(37,122,153,1) 100%); /* Chrome10-25,Safari5.1-6 */
-  /*background: linear-gradient(to bottom,  rgba(103,188,219,1) 0%,rgba(62,170,206,1) 40%,rgba(37,122,153,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#67bcdb', endColorstr='#257a99',GradientType=0 ); /* IE6-9 */
-
-}
-
-div.info-section {
-  display: inline-block;
-  margin: 0px;
-  padding: 5px;
-  height: 50px;
-  width: 160px;
-  border-style: solid;
-  border-width: 1px;
-  border-left-width: 0px;
-  border-bottom-width: 0px;
-  border-color: grey;
-  background: rgb(230,240,255);
-}
-
-div.selected-section {
-  position: relative;
-  display: inline-block;
-  margin: 0px;
-  padding: 5px;
-  height: 50px;
-  width: 160px;
-  border-style: solid;
-  border-width: 1px;
-  border-right-width: 0px;
-  border-color: grey;
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#97c1d1+0,74a9ba+40,437e93+100 */
-  background: rgb(151,193,209); /* Old browsers */
-  /*background: -moz-linear-gradient(top,  rgba(151,193,209,1) 0%, rgba(116,169,186,1) 40%, rgba(67,126,147,1) 100%); /* FF3.6-15 */
-  /*background: -webkit-linear-gradient(top,  rgba(151,193,209,1) 0%,rgba(116,169,186,1) 40%,rgba(67,126,147,1) 100%); /* Chrome10-25,Safari5.1-6 */
-  /*background: linear-gradient(to bottom,  rgba(151,193,209,1) 0%,rgba(116,169,186,1) 40%,rgba(67,126,147,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#97c1d1', endColorstr='#437e93',GradientType=0 ); /* IE6-9 */
-}
-
-div.unfinished-section {
-  display: inline-block;
-  margin: 0px;
-  padding: 5px;
-  height: 50px;
-  width: 160px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: grey;
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#c2c2c2+0,a2a2a2+40,737373+100 */
-  background: rgb(194,194,194); /* Old browsers */
-  background: -moz-linear-gradient(top, rgba(194,194,194,1) 0%, rgba(162,162,162,1) 40%, rgba(115,115,115,1) 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(top, rgba(194,194,194,1) 0%,rgba(162,162,162,1) 40%,rgba(115,115,115,1) 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom, rgba(194,194,194,1) 0%,rgba(162,162,162,1) 40%,rgba(115,115,115,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c2c2c2', endColorstr='#737373',GradientType=0 ); /* IE6-9 */
-}
-
-div.section-transition-arrow {
-  position: absolute;
-  right: 0px;
-  bottom: 0px;
-  font-size: 0px;
-  display: inline;
-  padding: 0px;
-  margin: 0px;
-  width: 0px;
-  height: 0px;
-  border-right-width: 12px;
-  border-left-width: 12px;
-  border-bottom-width: 24px;
-  border-top-width: 24px;
-  border-right-color: rgb(230,240,255);
-  /*border-right-color: rgb(103,188,219);
-  -webkit-border-image:
-    -webkit-gradient(linear, 0 0, 0 100%, from(black), to(rgba(0, 0, 0, 0))) 1 100%;
-  -webkit-border-image:
-    -webkit-linear-gradient(top,  rgba(103,188,219,1) 0%,rgba(62,170,206,1) 40%,rgba(37,122,153,1) 100%);
-  -moz-border-image:
-    -moz-linear-gradient(top,  rgba(103,188,219,1) 0%, rgba(62,170,206,1) 40%, rgba(37,122,153,1) 100%);
-  -o-border-image:
-    -o-linear-gradient(to bottom,  rgba(103,188,219,1) 0%,rgba(62,170,206,1) 40%,rgba(37,122,153,1) 100%);
-  border-image:
-    linear-gradient(to bottom,  rgba(103,188,219,1) 0%,rgba(62,170,206,1) 40%,rgba(37,122,153,1) 100%); */
-  border-left-color: transparent;
-  border-top-color: transparent;
-  border-bottom-color: transparent;
-  border-style: solid;
 }
 
 div.main-header {

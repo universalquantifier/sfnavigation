@@ -6,26 +6,18 @@ function ScoreScreen (game_number) {
 
 ScoreScreen.prototype = {};
 
-ScoreScreen.prototype.gameTypeButtons =  function () {
-    return ('<input type="button" value="Explode" onclick="start_space_fortress(new ExplodeConfig())">' +
-            '<input type="button" value="Autoturn" onclick="start_space_fortress(new AutoturnConfig())">'
-            // '<input type="button" value="Heat Seek" onclick="start_space_fortress(new HeatSeekingConfig())">'
-           );
-};
-
 ScoreScreen.prototype.init = function () {
-    $('#experiment_area').html('<div class="card" style="height: 700px;"><div class="message-container"><div class="message-body">'+
+    $('#experiment_area').html('<div class="card" style="height: 680px;"><div class="message-container"><div class="message-body">'+
                                '<h1 style="text-align: center;">Score</h1>' +
                                '<div style="text-align: left; display: inline-block;">'+
                                '<p>You scored '+exp.gamePoints.toString()+' points.' +
                                '<br>You earned a bonus of '+exp.formatDollars(exp.gameReward)+' this game.'+
                                '<p>In total you have earned a bonus of '+exp.formatReward()+'.'+
-                               '<div id="send_data" style="height: 100px; margin-top: 50px"></div>'+
+                               '<p style="text-align: center"><input type="button" class="sfbutton" value="Continue" id="game_data_continue">'+
                                '</div></div></div></div>');
     exp.lg('start', {'n': this.game_number});
-    this.sendData();
-
     $(document).on('keypress', $.proxy(this.keypress, this));
+    $('#game_data_continue').on('click', $.proxy(this.onward, this));
 };
 
 ScoreScreen.prototype.clearEvents = function (ev) {
@@ -38,33 +30,6 @@ ScoreScreen.prototype.keypress = function (ev) {
         // console.log('gobble');
         ev.preventDefault();
     }
-};
-
-ScoreScreen.prototype.sendData = function (ev) {
-    $('#send_data').html('<div class="sending sendprogress">Sending game data to server ...<br>please wait</div><p style="text-align: center"><img src="spinner.svg">');
-    exp.com.sendGameData(this.game_number, exp.gameDataLog, exp.gameEventLog, exp.gameKeyLog,
-                         $.proxy(this.success, this),
-                         $.proxy(this.fail, this));
-    exp.lg('send-data');
-};
-
-ScoreScreen.prototype.success = function (data) {
-    if (data.success) {
-        $('#send_data').html('<div class="sending sendsuccess">Game data successfully sent to server.<br>Click continue when ready.'+
-                             '</div><p style="text-align: center"><input type="button" value="Continue" id="game_data_continue">');
-        $('#game_data_continue').on('click', $.proxy(this.onward, this));
-        $(document).on('keypress', $.proxy(this.keypress, this));
-        exp.lg('success');
-    } else {
-        this.fail(data.reason);
-    }
-};
-
-ScoreScreen.prototype.fail = function (status) {
-    $('#send_data').html('<div class="sending sendfail">Failed to send game data.<br>Please click the button to try again.</div>' +
-                         '<p style="text-align: center"><input type="button" value="Try Again" id="game_data_retry">');
-    $('#game_data_retry').on('click', $.proxy(this.sendData, this));
-    exp.lg('fail', {'reason': status});
 };
 
 ScoreScreen.prototype.onward = function () {
@@ -88,12 +53,12 @@ function InstructionsGuts(pagefn, numPages, finishHook) {
 
 InstructionsGuts.prototype = {
     init: function () {
-        $('#experiment_area').html('<div class="card"><div class="main-header"></div><div class="full-message-body"><div id="demographic_info" class="info"></div><hr class="sf-hr">'+
+        $('#experiment_area').html('<div class="card" style="height:720px;"><div class="main-header"></div><div class="info"></div><hr class="sf-hr">'+
                                    '<div id="full-message-text" class="message-text">'+
                                    '</div>'+
-                                   '<div class="footer-continue-area"><input class="footer-continue sfbutton" type="button" id="prev-button" value="Previous Page"><input class="footer-continue sfbutton" type="button" id="next-button" value="Next Page"></div>'+
-                                   '</div></div>');
-
+                                   '<div class="footer-continue-area"><span class="footer-continue sfbutton" type="button" id="prev-button">Previous Page</span><span class="footer-continue sfbutton" type="button" id="next-button">Next Page</span></div>'+
+                                   '</div>');
+        
         $('#prev-button').on('click', $.proxy(this.prevPage, this));
         $('#next-button').on('click', $.proxy(this.nextPage, this));
         exp.lg('start-instructions');
@@ -374,7 +339,7 @@ End.prototype = {
         var msg = this.attemptCount > 0 ? nthTime:firstTime;
 
         $('#send_data').html('<div class="sending sendprogress">'+msg+'<br>Do NOT reload this page!</div><p style="text-area: center"><img src="spinner.svg">'+
-                             '<p><input type="button" value="Retry" id="retry_button">');
+                             '<p><input type="button" class="sfbutton" value="Retry" id="retry_button">');
 
         exp.stopAllTimeouts();
         exp.startTimeout(this.retryButtonDuration, $.proxy(this.enableRetryButton, this));
@@ -393,7 +358,7 @@ End.prototype = {
 
     showFail: function () {
         $('#send_data').html('<div class="sending sendfail">Failed to send HIT data.<br>Please click the button to try again.</div>' +
-                             '<p style="text-align: center"><input type="button" value="Try Again" id="game_data_retry">');
+                             '<p style="text-align: center"><input type="button" class="sfbutton" value="Try Again" id="game_data_retry">');
         $('#game_data_retry').on('click', $.proxy(this.sendData, this));
         exp.stopAllTimeouts();
         this.attemptCount += 1;
@@ -402,7 +367,7 @@ End.prototype = {
     maybeShowSubmitButton: function () {
         if (exp.com.isGameLogsComplete() && this.logDataComplete) {
             $('#send_data').html('<div class="sending sendsuccess">HIT data successfully sent to server.<br>Please click the button to submit the HIT.'+
-                                 '</div><p style="text-align: center"><input type="button" value="Submit HIT" id="end_button">');
+                                 '</div><p style="text-align: center"><input type="button" class="sfbutton" value="Submit HIT" id="end_button">');
             $('#end_button').on('click', $.proxy(this.submit, this));
             exp.stopAllTimeouts();
         }
