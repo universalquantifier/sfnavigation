@@ -2,7 +2,7 @@ function Config() {
     Object.call(this);
     this.game_time = 120000;
 
-    this.enter_rectangle = 20;
+    this.enter_rectangle = 25;
     this.ship_death_penalty = 100;
 
     this.ship_explode_duration = 1000;
