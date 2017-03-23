@@ -60,7 +60,7 @@ function getInstructions(page) {
         return ('<h3>Points</h3>'+
                 'You can monitor the total amount of points you have earned by looking at the box labelled PNTS.  Points are awarded or deducted as follows:'+
                 '<ul>'+
-                '<li>Entering a blue rectangle: +20 points'+
+                '<li>Entering a blue rectangle: +25 points'+
 	              '<li>Ship explosion: -100 points'+
                 '</ul>'+
                 'At no point in the game can you score less than zero points.'+
