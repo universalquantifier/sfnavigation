@@ -1,9 +1,9 @@
 experiment:
   mode: sandbox
-  name: autoturn
+  name: navigation
   version: v1
-  batch: 1
-  conditions: ["autoturn"]
+  batch: b1
+  conditions: ["nav"]
 
 HIT:
   lifetime: 3
@@ -11,8 +11,8 @@ HIT:
   base_pay: 4.00
   max_bonus: 12.00
   keywords: []
-  frame_height: 650
-  url: https://andersonlab.net/sf/sf.html
+  frame_height: 800
+  url: https://andersonlab.net/sfnavigation/sf.html
   title: Space Fortress Study
   description: |
     This task is part of a research study conducted by Dr. John R. Anderson at Carnegie Mellon University.

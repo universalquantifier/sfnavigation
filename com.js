@@ -1,10 +1,10 @@
 // Communication with server
 
-var RESUME_SERVER_URL = '/perl/sf/resume.pl';
-var STOREPROGRESS_SERVER_URL = '/perl/sf/store-progress.pl';
-var LOGBLOCK_SERVER_URL = '/perl/sf/store-log-block.pl';
-var GAMEDATA_SERVER_URL = '/perl/sf/store-game-data.pl';
-var LOG_SERVER_URL = '/perl/sf/store-log.pl';
+var RESUME_SERVER_URL = '/perl/sfnavigation/resume.pl';
+var STOREPROGRESS_SERVER_URL = '/perl/sfnavigation/store-progress.pl';
+var LOGBLOCK_SERVER_URL = '/perl/sfnavigation/store-log-block.pl';
+var GAMEDATA_SERVER_URL = '/perl/sfnavigation/store-game-data.pl';
+var LOG_SERVER_URL = '/perl/sfnavigation/store-log.pl';
 
 function Payload (url, timeout, data) {
     this.url = url;
