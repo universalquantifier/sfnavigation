@@ -478,3 +478,7 @@ div#status {
 .noDisplay {
   display : none;
 }
+
+span#prev-button {
+  margin-right: 20px;
+}

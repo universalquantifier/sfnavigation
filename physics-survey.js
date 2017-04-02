@@ -165,11 +165,13 @@ StdScreen.prototype.init = function() {
   $("#experiment_area").html(this.html(this.body));
   $('.card').css({"height": this.height});
   $('#submit').click(function(){
+    exp.lg('submit');
     if (self.submitEnabled && self.validate()) {
       exp.nextScreen();
     }
   });
   $('#submit').keydown(function(event){
+    exp.lg('submit');
     if (event.which == 13 && self.submitEnabled) {
       if (self.validate()) {
         exp.nextScreen();
@@ -272,6 +274,7 @@ Situation.prototype.init = function() {
   this.render();
 
   $('#left-screen-canvas').click(function(){
+    exp.lg('click-left-screen');
     situationObject.selected = situationObject.left;
     $("#left-screen-canvas").attr({"class":"selected"});
     $("#right-screen-canvas").attr({"class":"unselected"});
@@ -282,6 +285,7 @@ Situation.prototype.init = function() {
   });
 
   $('#right-screen-canvas').click(function(){
+    exp.lg('click-right-screen');
     situationObject.selected = situationObject.right;
     $("#left-screen-canvas").attr({"class":"unselected"});
     $("#right-screen-canvas").attr({"class":"selected"});
@@ -290,7 +294,11 @@ Situation.prototype.init = function() {
       situationObject.notify(situationObject.corrected_status);
     }
   });
-
+    
+  
+  exp.lg('start', {'question_type' : 'gamePhysics',
+                   'questionNumber': this.question_num,
+                   'question' : this.question });
 };
 
 Situation.prototype.validate = function() {
@@ -458,6 +466,7 @@ vectorAdditionQuestion.prototype.createAnswerOnClick = function(id) {
   return function(){
     //Unselect all answers
     for (var j = 0; j < self.answers.length; j++) {
+      exp.lg('click', {'id': id});
       $('#vaq-answer'+self.answers[j]).attr({"class":"vaq-canvas unselected-small"});
       self['vaq-answer'+self.answers[j]].selected = false;
     }
@@ -492,6 +501,9 @@ vectorAdditionQuestion.prototype.init = function() {
 
   this.generateLayout();
   this.render();
+    
+  exp.lg('start', {'question_type' : 'vectorAddition',
+                   'questionNumber': this.question_num});
 
 };
 
