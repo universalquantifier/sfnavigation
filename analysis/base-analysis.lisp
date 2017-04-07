@@ -87,6 +87,9 @@ class containing all the data."))
    (complete-p :accessor complete-p)
    (duration :accessor duration)))
 
+(defclass unknown (screen)
+  ())
+
 (defgeneric parse-duration (screen))
 (defgeneric parse-correct-p (screen))
 (defgeneric sanity-check (screen)
@@ -165,7 +168,7 @@ class containing all the data."))
      collect (prog1
                  ;; screen's latest addition is from the next screen, so
                  ;; ditch it.
-                 (make-instance (line-id (second screen))
+                 (make-instance (or (line-id (second screen)) 'unknown)
                                 :lines (reverse (cdr screen)))
                ;; (print "----")
                ;; (print (cdr screen))

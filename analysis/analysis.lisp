@@ -162,7 +162,7 @@
 
 (defun feedback-summary-sheet (logs)
   (let ((sheet (make-instance 'excel:sheet :name "Feedback")))
-    (excel:add-row sheet "Participant" "Field" "Text" "First Game" "Last Game" "playedBefore" "SimilarGame" "Physics")
+    (excel:add-row sheet "Participant" "Field" "Text" "playedBefore" "SimilarGame" "Physics")
     (dolist (l logs)
       (let ((p1 (find-if (lambda (s) (typep s 'gamequestions)) (screens l)))
             (p2 (find-if (lambda (s) (typep s 'feedback)) (screens l))))
@@ -171,15 +171,13 @@
                 (s2 (extract-key p2 'end :survey)))
             ;; (when (find #\& judgement :test #'char=)
             ;;   (setf judgement (substitute #\A #\& judgement :test #'char=)))
-            (excel:add-row sheet (id l) "Prior Experience" nil nil nil
+            (excel:add-row sheet (id l) "Prior Experience" nil
                            (getf s2 :playedbefore)
                            (getf s2 :game)
                            (getf s2 :physics))
-            (excel:add-row sheet (id l) "Priority" nil (getf s1 :priority1) (getf s1 :priority2))
-            (excel:add-row sheet (id l) "Attention" nil (getf s1 :attention1) (getf s1 :attention2))
-            (excel:add-row sheet (id l) "Thrust" nil (getf s1 :thrust1) (getf s1 :thrust2))
-            (excel:add-row sheet (id l) "Vlner" nil (getf s1 :vlner1) (getf s1 :vlner2))
-            (excel:add-row sheet (id l) "Challenge" (getf s2 :challenge))
+            (excel:add-row sheet (id l) "Timing" (getf s1 :timing1))
+            (excel:add-row sheet (id l) "Angle" (getf s1 :angle1))
+            (excel:add-row sheet (id l) "Difficulties" (getf s1 :difficulties1))
             (excel:add-row sheet (id l) "Feedback" (getf s2 :feedback))
             (excel:add-row sheet))
           (format t "~&~a has no feedback." (id l)))))

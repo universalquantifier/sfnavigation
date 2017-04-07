@@ -1,6 +1,6 @@
 (in-package #:asdf)
 
-(defsystem mturk-sf-analysis
+(defsystem mturk-sfnav-analysis
   :depends-on (st-json cl-ppcre util xlsx)
   :serial t
   :components ((:file "base-analysis")
