@@ -165,16 +165,20 @@ StdScreen.prototype.init = function() {
   $("#experiment_area").html(this.html(this.body));
   $('.card').css({"height": this.height});
   $('#submit').click(function(){
-    exp.lg('submit');
     if (self.submitEnabled && self.validate()) {
+      exp.lg('submit', {'valid': true});
       exp.nextScreen();
+    } else {
+      exp.lg('submit', {'valid': false});
     }
   });
   $('#submit').keydown(function(event){
-    exp.lg('submit');
     if (event.which == 13 && self.submitEnabled) {
       if (self.validate()) {
+        exp.lg('key-submit', {'valid': true});
         exp.nextScreen();
+      } else {
+        exp.lg('key-submit', {'valid': false});
       }
     }
   });
@@ -184,6 +188,7 @@ StdScreen.prototype.cleanup = function() {};
 
 function Situation(config, question, qnum, num_questions, randomize_order) {
     StdScreen.call(this);
+    this.screen_id = 'Situation';
 
     this.left = 'A', this.right = 'B';
     if (randomize_order && Math.random() > 0.5) {
@@ -298,7 +303,9 @@ Situation.prototype.init = function() {
   
   exp.lg('start', {'question_type' : 'gamePhysics',
                    'questionNumber': this.question_num,
-                   'question' : this.question });
+                   'question' : this.question,
+                   'left': this.left,
+                   'right': this.right});
 };
 
 Situation.prototype.validate = function() {
@@ -378,6 +385,7 @@ Situation.prototype.cleanup = function() {
 
 function vectorAdditionQuestion(question,num,outOf) {
   StdScreen.call(this);
+  this.screen_id = 'vectorAdditionQuestion';
   this.x = question.X;
   this.y = question.Y;
 
@@ -464,13 +472,12 @@ answerOption.prototype.draw = function() {
 vectorAdditionQuestion.prototype.createAnswerOnClick = function(id) {
   var self = this;
   return function(){
+    exp.lg('click', {'id': id});
     //Unselect all answers
     for (var j = 0; j < self.answers.length; j++) {
-      exp.lg('click', {'id': id});
       $('#vaq-answer'+self.answers[j]).attr({"class":"vaq-canvas unselected-small"});
       self['vaq-answer'+self.answers[j]].selected = false;
     }
-
     //Select answer with ID id
     self.selected = id;
     self[id].selected=true;
@@ -503,7 +510,13 @@ vectorAdditionQuestion.prototype.init = function() {
   this.render();
     
   exp.lg('start', {'question_type' : 'vectorAddition',
-                   'questionNumber': this.question_num});
+                   'questionNumber': this.question_num,
+                   'x': this.x,
+                   'y': this.y,
+                   'A': this.answerA,
+                   'B': this.answerB,
+                   'C': this.answerC,
+                   'D': this.answerD});
 
 };
 
