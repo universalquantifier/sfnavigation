@@ -293,7 +293,9 @@ sub dollars {
     my $cents = shift;
     if ($cents =~ /^(\d+)(\d\d)$/) {
         return "$1.$2";
-    } elsif ($cents =~ /^\d?\d$/) {
+    } elsif ($cents =~ /^\d$/) {
+        return "0.0$cents";
+    } elsif ($cents =~ /^\d\d$/) {
         return "0.$cents";
     } else {
         die "Dunno how to format cents: '$cents'";
@@ -325,16 +327,19 @@ sub summarize_submitted_assignments {
   foreach my $id (keys (%{$exp->{assignments}})) {
     my $a = $exp->{assignments}->{$id};
     my $d = dollars($a->{bonus});
+    next if $a->{approved} && $a->{bonus_awarded};
     print "Worker=$a->{worker_id}";
     if (!$a->{approved}) {
       print " Assignment=$id";
     }
     if (!$a->{bonus_awarded}) {
-      print " Bonus=$d\n";
+      print " Bonus=$d";
       $sum += $a->{bonus};
       # mturk fee
       $sum += sprintf("%.0f", $a->{bonus}* 0.2);
+      print " TOTAL=$sum $a->{bonus}";
     }
+    print "\n";
   }
   close(FH);
 
@@ -347,6 +352,7 @@ sub approve_submitted_assignments {
 
   foreach my $id (keys (%{$exp->{assignments}})) {
     my $a = $exp->{assignments}->{$id};
+    next if $a->{approved} && $a->{bonus_awarded};
     print "[worker $a->{worker_id}]";
     unless ($a->{approved}) {
       $exp->{mturk}->ApproveAssignment ( AssignmentId => $id );
@@ -431,17 +437,12 @@ sub _get_answers {
     $answers{$question} = $answer;
   }
 
-  if (! exists $answers{'logdata'}) {
+  if (!(exists $answers{'bonus'} && exists $answers{'resumes'} && exists $answers{'condition'})) {
+    print(Dumper(%answers));
     die "log isn't in XML.";
   }
 
   return \%answers;
-}
-
-sub _get_log_data {
-  my $xml = shift;
-  my $answers = _get_answers($xml);
-  return $answers->{logdata};
 }
 
 sub get_submitted_assignments {
@@ -463,40 +464,18 @@ sub get_submitted_assignments {
       return \@ret;
     }
     for (my $i=0; $i<$assignments->{NumResults}[0]; $i++) {
-      my $log_data = decode_base64(_get_log_data($assignments->{Assignment}[$i]->{Answer}->[0]));
+      my $answers = _get_answers($assignments->{Assignment}[$i]->{Answer}->[0]);
+      # print Dumper($answers);
       push @ret, { AssignmentId => $assignments->{Assignment}->[$i]->{AssignmentId}->[0],
                    WorkerId => $assignments->{Assignment}->[$i]->{WorkerId}->[0],
                    HITId => $assignments->{Assignment}->[$i]->{HITId}->[0],
-                   LogData => $log_data,
-                   DecodedLogData => decode_json($log_data)
+                   Bonus => $answers->{bonus},
+                   Condition => $answers->{condition},
+                   Resumes => $answers->{resumes}
                  };
     }
   }
   die "We never get here.";
-}
-
-sub _get_resume_status {
-  my $exp = shift;
-  my $assignment = shift;
-
-  for my $l (@{$assignment->{DecodedLogData}}) {
-    if ($l->{screen} eq 'experiment' && $l->{tag} eq 'start') {
-      return $l->{resume};
-    }
-  }
-  die "Couldn't get the resume status!";
-}
-
-sub _get_bonus {
-  my $exp = shift;
-  my $assignment = shift;
-
-  for my $l (@{$assignment->{DecodedLogData}}) {
-    if ($l->{screen} eq 'experiment' && $l->{tag} eq 'end') {
-      return $l->{reward};
-    }
-  }
-  die "Couldn't get the bonus!";
 }
 
 sub save_assignment_data {
@@ -505,16 +484,11 @@ sub save_assignment_data {
 
   $exp->{assignments}->{$assignment->{AssignmentId}} = { worker_id => $assignment->{WorkerId},
                                                          hit_id => $assignment->{HITId},
-                                                         bonus => $exp->_get_bonus($assignment),
+                                                         bonus => $assignment->{Bonus},
                                                          approved => 0,
                                                          bonus_awarded => 0
                                                        };
   $exp->_save_assignments();
-  my $dir = "$exp->{basedir}/$assignment->{WorkerId}";
-  mkdir($dir) unless -e $dir;
-  open(FH,">$dir/$assignment->{WorkerId}.$assignment->{HITId}.$assignment->{AssignmentId}.log");
-  print FH $assignment->{LogData};
-  close(FH);
 }
 
 sub download_all_assignment_data {
@@ -523,16 +497,14 @@ sub download_all_assignment_data {
   foreach my $c (sort(keys(%{$exp->{hits}->{conditions}}))) {
     print ("$c:\n");
     foreach my $h (@{$exp->{hits}->{conditions}->{$c}}) {
-      print "  $h:";
+      print "  $h: ";
       my $assignments = $exp->get_submitted_assignments($h);
       foreach my $a (@$assignments) {
-        print "$a->{WorkerId}";
-        my $resume = $exp->_get_resume_status($a);
-        my $bonus = $exp->_get_bonus($a);
-        if ($resume) {
+        print "    $a->{WorkerId}";
+        if ($a->{Resumes}) {
           print " [RESUMED]";
         }
-        print " [bonus $bonus]";
+        print " [bonus $a->{Bonus}]";
         $exp->save_assignment_data($a);
         print " [saved]";
         print "\n";
